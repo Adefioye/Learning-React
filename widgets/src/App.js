@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
+import Dropdown from "./components/Dropdown";
+import Translate from "./components/Translate";
 
 const items = [
   {
@@ -9,7 +11,7 @@ const items = [
   },
   {
     title: "Why use React?",
-    content: "React is a favorite JS library among sonftware engineers",
+    content: "React is a favorite JS library among software engineers",
   },
   {
     title: "How do you use React?",
@@ -17,10 +19,25 @@ const items = [
   },
 ];
 
+const options = [
+  {
+    label: "The Color Red",
+    value: "red",
+  },
+  {
+    label: "The Color Green",
+    value: "green",
+  },
+  {
+    label: "A Shade of Blue",
+    value: "blue",
+  },
+];
+
 const App = () => {
   return (
     <div>
-      <Search />
+      <Translate />
     </div>
   );
 };
