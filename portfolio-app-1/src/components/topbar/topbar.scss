@@ -1,9 +1,80 @@
 @import "../../global.scss";
 
 .topbar {
-  background-color: $mainColor;
+  background-color: white;
+  color: $mainColor;
   width: 100%;
   height: 70px;
   position: fixed;
   z-index: 2;
+
+  .wrapper {
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      font-size: 1.5rem;
+      color: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      margin-right: 40px;
+    }
+
+    .itemContainer {
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+
+      .icon {
+        margin-right: 0.2rem;
+      }
+
+      span {
+        font-size: 0.7rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .right {
+    .hamburger {
+      width: 32px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      scrollbar-width: none; // To remove scrollbar in Firefox
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      span {
+        width: 100%;
+        height: 3px;
+        background-color: $mainColor;
+      }
+    }
+  }
+
+  &.active {
+    background-color: $mainColor;
+    color: white;
+
+    .hamburger {
+      span {
+        &:first-child {
+          background-color: white;
+        }
+      }
+    }
+  }
 }
