@@ -1,3 +1,64 @@
 .intro {
-  background-color: lightseagreen;
+  background-color: white;
+  display: flex;
+  .left {
+    flex: 0.5;
+    overflow: hidden;
+
+    .imgContainer {
+      width: 600px;
+      height: 600px;
+      background-color: crimson;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      float: right;
+
+      img {
+        width: 90%;
+      }
+    }
+  }
+  .right {
+    flex: 0.5;
+    position: relative;
+
+    .wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      margin: 0 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-left: 0;
+
+      h1 {
+        font-size: 2rem;
+        margin: 10px 0;
+      }
+      h2 {
+        font-size: 1rem;
+      }
+      h3 {
+        font-size: 1.2rem;
+      }
+    }
+    a {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      img {
+        width: 30px;
+        animation: arrowBlink 2s infinite;
+      }
+
+      @keyframes arrowBlink {
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+  }
 }
