@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./intro.scss";
+import { init } from "ityped";
 
 export default function Intro() {
+  const ref = useRef();
+  useEffect(() => {
+    init(ref.current, {
+      showCursor: true,
+      strings: ["Developer", "Designer", "Content Creator"],
+    });
+  }, []);
+
   return (
     <div className="intro" id="intro">
       <div className="left">
@@ -14,7 +23,7 @@ export default function Intro() {
           <h2>Hi There, I'm</h2>
           <h1>Adeniji Adeshola</h1>
           <h3>
-            Freelancer <span></span>{" "}
+            Freelancer <span ref={ref}></span>
           </h3>
         </div>
         <a href="#portfolio">
