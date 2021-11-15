@@ -1,13 +1,14 @@
 import React from "react";
-import logo from "../logo.svg";
+import logo from "./../../logo.svg";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/home">
           <img src={logo} style={{ width: "35px" }} />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -22,23 +23,29 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav m-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link active text-white text-uppercase ml-10"
                 aria-current="page"
-                href="#"
+                to="/home"
               >
                 Home&nbsp;<i class="fas fa-home"></i>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white text-uppercase ml-10" href="#">
+              <Link
+                className="nav-link text-white text-uppercase ml-10"
+                to="/news"
+              >
                 News
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white text-uppercase ml-10" href="#">
+              <Link
+                className="nav-link text-white text-uppercase ml-10"
+                to="/contact"
+              >
                 Contact us
-              </a>
+              </Link>
             </li>
           </ul>
           <form className="d-flex">
