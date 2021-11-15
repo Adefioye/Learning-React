@@ -23,7 +23,7 @@ function Navbar() {
           <ul className="navbar-nav m-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <a
-                className="nav-link active text-white text-uppercase ml-5"
+                className="nav-link active text-white text-uppercase ml-10"
                 aria-current="page"
                 href="#"
               >
@@ -31,12 +31,12 @@ function Navbar() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white text-uppercase ml-5" href="#">
+              <a className="nav-link text-white text-uppercase ml-10" href="#">
                 News
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white text-uppercase ml-5" href="#">
+              <a className="nav-link text-white text-uppercase ml-10" href="#">
                 Contact us
               </a>
             </li>
