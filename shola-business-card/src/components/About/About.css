@@ -1,0 +1,9 @@
+.about p {
+  color: lightgray;
+}
+
+@media only screen and (min-width: 700px) {
+  .about {
+    margin-top: 1.5rem;
+  }
+}

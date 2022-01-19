@@ -1,0 +1,45 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.info-pic {
+  width: 10rem;
+  border: 2px solid white;
+}
+
+.info-name {
+  margin-top: 0.9rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.15rem;
+}
+
+.info-title {
+  font-size: 0.8rem;
+  color: lightgray;
+}
+
+.info-link button {
+  margin-left: 0.3rem;
+  width: 5rem;
+  height: 1.5rem;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+.info-link button:last-child {
+  background-color: rgb(67, 67, 219);
+  color: white;
+}
+
+/* .info-link {
+  /* background-color: blue; 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+} */
+/* .info-link {
+  display: flex;
+} */

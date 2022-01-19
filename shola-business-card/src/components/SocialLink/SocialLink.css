@@ -1,0 +1,24 @@
+.social-link {
+  display: flex;
+}
+
+.social-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto;
+  width: 20rem;
+  margin-bottom: 2rem;
+}
+
+.social-icon {
+  font-size: 2rem;
+  color: lightgray;
+  opacity: 0.5;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+  opacity: 1;
+}
