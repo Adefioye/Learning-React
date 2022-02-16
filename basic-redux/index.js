@@ -1,6 +1,12 @@
 // Actions are objects that are used to represent events needed to change the
 // of the app.
 
+// Generate uniqueid
+
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+}
+
 // LIBRARY CODE
 function createStore(reducer) {
   // There store should have 4 parts
@@ -119,49 +125,109 @@ function app(state = {}, action) {
 const store = createStore(app);
 
 store.subscribe(() => {
-  console.log("The new state is: ", store.getState());
+  const { todos, goals } = store.getState();
+
+  document.querySelector("#todos").innerHTML = "";
+  document.querySelector("#goals").innerHTML = "";
+
+  todos.forEach(addTodoToDOM);
+  goals.forEach(addGoalToDOM);
 });
 
-store.dispatch(
-  addTodoAction({
-    id: 0,
-    name: "Walk the dog",
-    complete: false,
-  })
-);
+//
+function addTodoToDOM(todo) {
+  const node = document.createElement("li");
+  const text = document.createTextNode(todo.name);
+  node.appendChild(text);
+  node.style.textDecoration = todo.complete ? "line-through" : "none";
+  node.addEventListener("click", () => {
+    store.dispatch(toggleTodoAction(todo.id));
+  });
 
-store.dispatch(
-  addTodoAction({
-    id: 1,
-    name: "Wash the car",
-    complete: false,
-  })
-);
+  document.querySelector("#todos").appendChild(node);
+}
 
-store.dispatch(
-  addTodoAction({
-    id: 2,
-    name: "Go to the gym",
-    complete: true,
-  })
-);
+function addGoalToDOM(goal) {
+  const node = document.createElement("li");
+  const text = document.createTextNode(goal.name);
+  node.appendChild(text);
 
-store.dispatch(removeTodoAction(1));
+  document.querySelector("#goals").appendChild(node);
+}
 
-store.dispatch(toggleTodoAction(1));
+// store.dispatch(
+//   addTodoAction({
+//     id: 0,
+//     name: "Walk the dog",
+//     complete: false,
+//   })
+// );
 
-store.dispatch(
-  addGoalAction({
-    id: 0,
-    name: "Learn Redux",
-  })
-);
+// store.dispatch(
+//   addTodoAction({
+//     id: 1,
+//     name: "Wash the car",
+//     complete: false,
+//   })
+// );
 
-store.dispatch(
-  addGoalAction({
-    id: 1,
-    name: "Lose 20 pounds",
-  })
-);
+// store.dispatch(
+//   addTodoAction({
+//     id: 2,
+//     name: "Go to the gym",
+//     complete: true,
+//   })
+// );
 
-store.dispatch(removeGoalAction(0));
+// store.dispatch(removeTodoAction(1));
+
+// store.dispatch(toggleTodoAction(1));
+
+// store.dispatch(
+//   addGoalAction({
+//     id: 0,
+//     name: "Learn Redux",
+//   })
+// );
+
+// store.dispatch(
+//   addGoalAction({
+//     id: 1,
+//     name: "Lose 20 pounds",
+//   })
+// );
+
+// store.dispatch(removeGoalAction(0));
+
+// DOM CODE
+
+function addTodo() {
+  const input = document.getElementById("todo");
+  const name = input.value;
+  input.value = "";
+
+  store.dispatch(
+    addTodoAction({
+      id: generateId(),
+      name,
+      complete: false,
+    })
+  );
+}
+
+function addGoal() {
+  const input = document.getElementById("goal");
+  const name = input.value;
+  input.value = "";
+
+  store.dispatch(
+    addGoalAction({
+      id: generateId(),
+      name,
+    })
+  );
+}
+
+document.querySelector("#todoBtn").addEventListener("click", addTodo);
+
+document.querySelector("#goalBtn").addEventListener("click", addGoal);
