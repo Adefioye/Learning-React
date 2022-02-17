@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/react@16.13.1/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script src="https://ui.dev/goals-todos-api/index.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -35,8 +36,14 @@
           <ul>
             {props.items.map((item) => (
               <li key={item.id}>
-                <span onClick={() => props.toggle(item.id)}
-                  style={{textDecoration: item.complete ? "line-through" : "none"}}>{item.name}</span>
+                <span
+                  onClick={() => props.toggle(item.id)}
+                  style={{
+                    textDecoration: item.complete ? "line-through" : "none",
+                  }}
+                >
+                  {item.name}
+                </span>
                 <button onClick={() => props.remove(item)}>X</button>
               </li>
             ))}
@@ -61,10 +68,20 @@
 
         removeItem = (todo) => {
           this.props.store.dispatch(removeTodoAction(todo.id));
+
+          return API.deleteTodo(todo.id).catch(() => {
+            this.props.store.dispatch(addTodoAction(todo));
+            alert("An error occured, Try again");
+          });
         };
 
         toggleItem = (id) => {
           this.props.store.dispatch(toggleTodoAction(id));
+
+          return API.saveTodoToggle(id).catch(() => {
+            this.props.store.dispatch(toggleTodoAction(id));
+            alert("An error occured, Try again!");
+          });
         };
 
         render() {
@@ -104,6 +121,11 @@
 
         removeItem = (goal) => {
           this.props.store.dispatch(removeGoalAction(goal.id));
+
+          return API.deleteGoal(goal.id).catch(() => {
+            this.props.store.dispatch(addGoalAction(goal));
+            alert("An error occured, Try again!");
+          });
         };
 
         render() {
@@ -126,11 +148,22 @@
       class App extends React.Component {
         componentDidMount() {
           const { store } = this.props;
+
+          Promise.all([API.fetchTodos(), API.fetchGoals()]).then(
+            ([todos, goals]) => {
+              store.dispatch(receiveDataAction(todos, goals));
+            }
+          );
+
           store.subscribe(() => this.forceUpdate());
         }
         render() {
           const { store } = this.props;
-          const { todos, goals } = store.getState();
+          const { todos, goals, loading } = store.getState();
+
+          if (loading === true) {
+            return <h1>Loading...</h1>;
+          }
 
           return (
             <div>
