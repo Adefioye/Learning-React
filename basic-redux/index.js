@@ -61,6 +61,72 @@ function receiveDataAction(todos, goals) {
   };
 }
 
+// For separating data fetching logic from UI logic
+
+function handleAddTodo(name, cb) {
+  return (dispatch) => {
+    return API.saveTodo(name)
+      .then((todo) => {
+        dispatch(addTodoAction(todo));
+        cb();
+      })
+      .catch(() => alert("An error occured, Try again"));
+  };
+}
+
+function handleToggleTodo(id) {
+  return (dispatch) => {
+    dispatch(toggleTodoAction(id));
+
+    return API.saveTodoToggle(id).catch(() => {
+      dispatch(toggleTodoAction(id));
+      alert("An error occured, Try again!");
+    });
+  };
+}
+
+function handleDeleteTodo(todo) {
+  return (dispatch) => {
+    dispatch(removeTodoAction(todo.id));
+    return API.deleteTodo(todo.id).catch(() => {
+      dispatch(addTodoAction(todo));
+      alert("An error occured, Try again");
+    });
+  };
+}
+
+function handleAddGoal(name, cb) {
+  return (dispatch) => {
+    return API.saveGoal(name)
+      .then((goal) => {
+        dispatch(addGoalAction(goal));
+        cb();
+      })
+      .catch(() => alert("An error occured, Try again"));
+  };
+}
+
+function handleDeleteGoal(goal) {
+  return (dispatch) => {
+    dispatch(removeGoalAction(goal.id));
+
+    return API.deleteGoal(goal.id).catch(() => {
+      dispatch(addGoalAction(goal));
+      alert("An error occured, Try again!");
+    });
+  };
+}
+
+function handleInitialData() {
+  return (dispatch) => {
+    return Promise.all([API.fetchTodos(), API.fetchGoals()]).then(
+      ([todos, goals]) => {
+        dispatch(receiveDataAction(todos, goals));
+      }
+    );
+  };
+}
+
 // Middleware hack
 
 // function checkAndDispatch(store, action) {
@@ -106,6 +172,14 @@ const logger = (store) => (next) => (action) => {
   console.log("The new state: ", store.getState());
   console.groupEnd();
   return result;
+};
+
+const thunk = (store) => (next) => (action) => {
+  if (typeof action === "function") {
+    return action(store.dispatch);
+  }
+
+  return next(action);
 };
 
 // Reducers
@@ -163,7 +237,7 @@ const store = Redux.createStore(
     goals,
     loading,
   }),
-  Redux.applyMiddleware(checker, logger)
+  Redux.applyMiddleware(thunk, checker, logger)
 );
 
 // store.subscribe(() => {
