@@ -240,7 +240,7 @@ const store = Redux.createStore(
   Redux.applyMiddleware(ReduxThunk.default, checker, logger)
 );
 
-// store.subscribe(() => {
+// store.subscribe(() => { 
 //   const { todos, goals } = store.getState();
 
 //   document.querySelector("#todos").innerHTML = "";
