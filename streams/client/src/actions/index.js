@@ -1,3 +1,5 @@
+// import { push } from "connected-react-router";
+
 import {
   SIGN_IN,
   SIGN_OUT,
@@ -8,6 +10,7 @@ import {
   DELETE_STREAM,
 } from "./types";
 import streams from "../api/streams";
+import history from "../history";
 
 export const signIn = (userId) => {
   return {
@@ -31,6 +34,8 @@ export const createStream = (formValues) => async (dispatch, getState) => {
   });
 
   dispatch({ type: CREATE_STREAM, payload: response.data });
+  // Programmatically navigate to the stream list page
+  history.push("/")
 };
 
 export const fetchStreams = () => async (dispatch) => {
