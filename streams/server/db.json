@@ -16,14 +16,14 @@
       "id": 3
     },
     {
-      "title": "Stream created by me",
-      "description": "This is the first edited stream with redirection to the list page",
+      "title": "first stream to delete",
+      "description": "Delete this first stream",
       "userId": "107751868815464507136",
       "id": 4
     },
     {
-      "title": "StreamCreate form refactored",
-      "description": "This is a stream edited with redirection effected",
+      "title": "Second stream to delete",
+      "description": "Make sure to delete this second  stream",
       "userId": "107751868815464507136",
       "id": 5
     }
