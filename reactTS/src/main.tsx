@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import GuestList from "./state/GuestList";
 import SearchUser from "./state/SearchUser";
+import EventComponent from "./event/EventComponent";
 
 function App() {
   return (
@@ -11,5 +12,5 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <SearchUser />
+  <EventComponent />
 );
